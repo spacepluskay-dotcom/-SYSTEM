@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Ø SYSTEM | Brand & AI Engineering</title>
+    
+    <!-- Fonts: Inter (Sans) and JetBrains Mono (Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              bg: {
+                0: 'var(--bg-0)',
+                1: 'var(--bg-1)',
+                panel: 'var(--bg-panel)',
+              },
+              line: {
+                0: 'var(--line-0)',
+                1: 'var(--line-1)',
+              },
+              signal: {
+                lime: 'var(--signal-lime)',
+                purple: 'var(--signal-purple)',
+                red: 'var(--danger-red)',
+              },
+              text: {
+                0: 'var(--text-0)',
+                1: 'var(--text-1)',
+                2: 'var(--text-2)',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            spacing: {
+              'dock': 'var(--dock-h)',
+              'nav-item': 'var(--nav-item-h)',
+            },
+            backgroundImage: {
+              'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+              'grid-pattern': "linear-gradient(to right, var(--line-0) 1px, transparent 1px), linear-gradient(to bottom, var(--line-0) 1px, transparent 1px)",
+              'spotlight': "radial-gradient(circle at center, var(--bg-spotlight) 0%, transparent 70%)",
+            },
+            animation: {
+              'scanline': 'scanline 8s linear infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'flicker': 'flicker 0.15s infinite',
+            },
+            keyframes: {
+              scanline: {
+                '0%': { backgroundPosition: '0 0' },
+                '100%': { backgroundPosition: '0 100%' },
+              },
+              flicker: {
+                '0%': { opacity: 0.97 },
+                '50%': { opacity: 1 },
+                '100%': { opacity: 0.98 },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root {
+        /* Color Tokens - Deep OLED Black Optimization */
+        --bg-0: #020202; /* True Void */
+        --bg-1: #080808; /* Component Background */
+        --bg-panel: rgba(2, 2, 2, 0.85); /* Glass Panel */
+        --bg-spotlight: rgba(204, 255, 0, 0.04); /* Subtler Lime Glow */
+        
+        --text-0: #F0F0F0; /* Bright White */
+        --text-1: #909090; /* Secondary Tech Grey */
+        --text-2: #4A4A4A; /* Tertiary Dark Grey */
+        
+        --signal-lime: #CCFF00;
+        --signal-purple: #BD00FF;
+        --danger-red: #FF3333;
+        
+        /* Sharper Lines */
+        --line-0: rgba(255, 255, 255, 0.04);
+        --line-1: rgba(255, 255, 255, 0.1);
+        
+        /* Layout Tokens */
+        --dock-h: 80px;
+        --nav-item-h: 48px;
+        --grid-size: 40px;
+        --container-w: 92%; 
+        
+        --safe-bottom: env(safe-area-inset-bottom, 20px);
+      }
+
+      body {
+        background-color: var(--bg-0);
+        color: var(--text-0);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      /* Base Effects */
+      .bg-system-grid {
+        background-size: var(--grid-size) var(--grid-size);
+        background-image: var(--grid-pattern);
+        background-position: center top;
+        mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      }
+      
+      .glass-panel {
+        background: var(--bg-panel);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--line-0);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Utility: Precise Type */
+      .type-h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; font-weight: 600; letter-spacing: -0.03em; }
+      .type-h2 { font-size: 1.875rem; line-height: 1.2; font-weight: 500; letter-spacing: -0.02em; }
+      .type-body { font-size: 1rem; line-height: 1.6; font-weight: 300; color: var(--text-1); letter-spacing: -0.01em; }
+      .type-mono-xs { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; }
+      
+      /* High-End CRT/Scanline Effects - Optimized */
+      .scanlines {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.1) 50%,
+          rgba(0,0,0,0.1)
+        );
+        background-size: 100% 4px;
+        animation: scanline 0.6s linear infinite; 
+        opacity: 0.15;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+      }
+
+      /* Selection */
+      ::selection {
+        background: var(--signal-lime);
+        color: black;
+        text-shadow: none;
+      }
+      
+      /* Custom Scrollbar - Sleek & Minimal */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: var(--bg-0); }
+      ::-webkit-scrollbar-thumb { 
+          background: #222; 
+          border-radius: 0px;
+          border: 1px solid var(--bg-0);
+      }
+      ::-webkit-scrollbar-thumb:hover { background: var(--signal-lime); }
+
+      /* Mobile Safe Area & Utilities */
+      .pb-safe { padding-bottom: var(--safe-bottom); }
+      .pb-dock-safe { padding-bottom: calc(var(--dock-h) + var(--safe-bottom)); }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      .mask-linear {
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "framer-motion": "https://esm.sh/framer-motion@^12.23.26",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
